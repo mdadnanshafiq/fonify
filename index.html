@@ -57,6 +57,9 @@
                 <button id="searchBtn"
                     class="btn join-item text-white bg-sky-500 active:bg-sky-500 hover:bg-sky-500">Search</button>
             </div>
+            <div id="loading" class="hidden">
+                <span class="loading loading-spinner loading-lg mt-8"></span>
+            </div>
         </section>
 
         <section class="w-[95%] mx-auto pb-16 flex flex-col justify-center items-center">
@@ -79,7 +82,8 @@
                 <!-- here -->
 
             </div>
-            <button class="btn text-white bg-sky-500 active:bg-sky-500 hover:bg-sky-500 text-center my-6">See
+            <button id="seeAll"
+                class="btn text-white bg-sky-500 active:bg-sky-500 hover:bg-sky-500 text-center my-6 hidden">See
                 All</button>
         </section>
 

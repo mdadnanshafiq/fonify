@@ -1,15 +1,29 @@
+let dataLength = 0;
+
 const callData = async (searchText) => {
     const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
     const res = await fetch(url);
     const data = await res.json();
     const phones = data.data;
-    console.log(phones);
+    // console.log(phones);
+    dataLength = phones.length;
+    if (dataLength < 1) {
+        alert('No match found!');
+    }
     displayPhones(phones);
 };
 
 const phoneContainer = document.getElementById('phoneContainer');
 
 const displayPhones = phones => {
+
+    if (phones.length < 12) {
+        document.getElementById('seeAll').classList.add('hidden');
+    } else {
+        document.getElementById('seeAll').classList.remove('hidden');
+    }
+    phones = phones.slice(0, 12);
+
     phones.forEach(phone => {
 
         let div = document.createElement('div');
@@ -28,9 +42,10 @@ const displayPhones = phones => {
             </div>
         </div>
         `
-        console.log(phone);
+        // console.log(phone);
         phoneContainer.appendChild(div);
     })
+    document.getElementById('loading').classList.add('hidden');
 };
 
 
@@ -38,15 +53,13 @@ const displayPhones = phones => {
 const searchText = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
 searchBtn.addEventListener('click', () => {
-
+    document.getElementById('loading').classList.remove('hidden');
     if (searchText.value === '') {
         phoneContainer.innerHTML = '';
         callData('a');
-        displayPhones(phones);
     } else {
         phoneContainer.innerHTML = '';
         callData(searchText.value);
-        displayPhones(phones);
     }
 })
 
